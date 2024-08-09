@@ -1,0 +1,27 @@
+.dropdown {
+    position: relative;
+  }
+  
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 100%;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    z-index: 1000;
+  }
+  
+  .dropdown.open .dropdown-menu {
+    display: block;
+  }
+  
+  .dropdown-item {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .dropdown-item img {
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+  

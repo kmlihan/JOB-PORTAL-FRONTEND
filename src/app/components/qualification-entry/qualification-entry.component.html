@@ -1,0 +1,35 @@
+<div class="border-top mt-4 pt-4">
+    <h3>Qualifications</h3>
+    <div id="qualifications-container">
+      <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+      <div class="row mb-3" *ngFor="let qualification of qualificationControls; let i = index">
+        <div class="col-md-4">
+          <label  class="mb-2">Degree</label>
+          <input type="text" [formControl]="degree(i)" class="form-control" [ngClass]="{'is-invalid': !degree(i).valid && degree(i).touched }" >
+          <div *ngIf="!degree(i).valid && degree(i).touched" class="text-danger">
+              Degree is required.
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="start_date" class="mb-2">Start Date</label>
+          <input type="date" [formControl]="startDate(i)" class="form-control" [ngClass]="{'is-invalid': !startDate(i).valid && startDate(i).touched }">
+          <div *ngIf="!startDate(i).valid && startDate(i).touched" class="text-danger">
+            Start date is required.
+        </div>
+        </div>
+        <div class="col-md-4">
+          <label for="end_date" class="mb-2">End Date</label>
+          <input type="date" [formControl]="endDate(i)" class="form-control" [ngClass]="{'is-invalid': !endDate(i).valid && endDate(i).touched }">
+          <div *ngIf="!endDate(i).valid && endDate(i).touched" class="text-danger">
+            End date is required.
+        </div>
+        </div>
+        <div class="col-md-12 text-end mt-3">
+          <button type="button" class="btn btn-danger" [hidden]="formDisabled" (click)="removeQualification(i)">Remove</button>
+        </div>
+      </div>
+ 
+      <button type="button" class="btn btn-primary mt-2" [hidden]="formDisabled" (click)="addQualification()">Add Qualification</button>
+    </div>
+  </div>
+  

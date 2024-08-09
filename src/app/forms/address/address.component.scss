@@ -1,0 +1,44 @@
+.form-group {
+  margin-bottom: 1.5rem; /* Adjust the space between fields */
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap; /* Ensures responsiveness */
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.has-error input,
+.has-error select {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+  }
+}

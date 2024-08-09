@@ -1,0 +1,151 @@
+.about-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+  background-color: #eefffa;
+}
+
+.about-content {
+  background: #ffffff; /* White background for a clean look */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  width: 100%;
+  padding: 40px;
+  color: #333; /* Dark text color for readability */
+}
+
+.about-info, .feedback-section, .about-stats {
+  margin-bottom: 40px;
+}
+
+.about-info h2, .about-info h3, .feedback-section h3, .about-stats h3 {
+  color: #00806F; /* Main color for headings */
+  border-bottom: 2px solid #00806F;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.about-info p, .about-info ul {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.about-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.about-info ul li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: flex-start;
+  padding-left: 20px;
+  position: relative;
+}
+
+.about-info ul li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #00806F; /* Main color for list bullets */
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.about-info ul li strong {
+  color: #00806F; /* Main color for strong text */
+  margin-right: 5px;
+}
+
+.feedback-section h3 {
+  color: #00806F; /* Main color for headings */
+  border-bottom: 2px solid #00806F;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.feedback {
+  background: #f7f7f7;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feedback:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.feedback p {
+  margin: 0;
+  color: #333;
+}
+
+.feedback p strong {
+  display: block;
+  margin-bottom: 10px;
+  color: #00806F; /* Main color for strong text */
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 10px;
+  color:white;
+}
+
+.about-grid > div {
+  background: #00806F; /* Light background for contrast */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-grid h3 {
+  color: #00806F; /* Main color for headings */
+  border-bottom: 2px solid white;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.about-stats {
+  display: flex;
+  justify-content: space-around;
+  background: #00806F; /* Darker shade for the stats background */
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 40px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat h3 {
+  color: #00c9ff;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.stat p {
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-stats {
+    flex-direction: column;
+    align-items: center;
+  }
+}

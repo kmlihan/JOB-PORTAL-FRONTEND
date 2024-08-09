@@ -1,0 +1,35 @@
+.dialog-container {
+    background: red; /* Match the gradient */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Padding inside the dialog */
+    color: white; /* Text color */
+    text-align: center; /* Center align text */
+  }
+  
+  .dialog-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .dialog-content {
+    margin-bottom: 20px;
+  }
+  
+  .dialog-actions {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .dialog-button {
+    background-color: #00806F; /* Button background */
+    color: white; /* Button text color */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .dialog-button:hover {
+    background-color: #80D0C7; /* Button hover color */
+  }
+  

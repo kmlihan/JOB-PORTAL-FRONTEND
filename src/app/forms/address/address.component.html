@@ -1,0 +1,55 @@
+
+
+<div class="border-top mt-4 pt-4" [formGroup]="addressFormGroup">
+  <h3>Address</h3>
+  <div class="row mb-3">
+      <div class="col-md-6">
+          <label for="box" class="mb-2">Box</label>
+          <input type="text" id="box"   [class.view-mode]="viewMode === 'view'" formControlName="box" name="address[box]"  class="form-control" >
+       
+      </div>
+      <div class="col-md-6">
+          <label for="postal_code" class="mb-2">Postal Code*</label>
+          <input type="text"   [class.view-mode]="viewMode === 'view'" formControlName="postalCode" class="form-control" >
+          <div *ngIf="!postalCode!.valid && postalCode!.touched" class="text-danger">
+            Postal Code is required.
+          </div>
+      </div>
+  </div>
+  <div class="row mb-3">
+      <div class="col-md-6">
+          <label for="city" class="mb-2">City*</label>
+          <input type="text"   [class.view-mode]="viewMode === 'view'" formControlName="city" class="form-control" >
+          <div *ngIf="!city!.valid && city!.touched" class="text-danger">
+            City is required.
+          </div>
+      </div>
+      <div class="col-md-6">
+          <label for="street" class="mb-2">Street*</label>
+          <input type="text"   [class.view-mode]="viewMode === 'view'" formControlName="street" class="form-control" >
+          <div *ngIf="!street!.valid && street!.touched" class="text-danger">
+            Street is required.
+          </div>
+        
+      </div>
+  </div>
+  <div class="row mb-3">
+      <div class="col-md-6">
+          <label for="house_number" class="mb-2">House Number*</label>
+          <input type="text"   [class.view-mode]="viewMode === 'view'" formControlName="houseNumber" class="form-control" >
+          <div *ngIf="!houseNumber!.valid && houseNumber!.touched" class="text-danger">
+            House Number is required.
+          </div>
+      </div>
+      <div class="col-md-6">
+          <label for="country_id" class="mb-2">Country*</label>
+          <select formControlName="country"   [class.view-mode]="viewMode === 'view'"  class="form-control">
+            <option [selected]="true">Select Country</option> 
+            <option *ngFor="let country of countriesList" [ngValue]="country.iso">{{ country.name }}</option>
+          </select>
+          <div *ngIf="!country!.valid && country!.touched" class="text-danger">
+            Country  is required.
+          </div>
+      </div>
+  </div>
+</div>

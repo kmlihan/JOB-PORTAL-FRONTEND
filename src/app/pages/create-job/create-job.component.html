@@ -1,0 +1,178 @@
+
+<section class="section-5">
+    <div class="container my-5">
+        <div class="py-lg-2">&nbsp;</div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-30">
+                <div class="card shadow border-0 p-5">
+                    <h1 class="h3">Create job</h1>
+                    <form [formGroup]="createJobForm">
+                        <div class="row mb-3">
+                            <div class="col-md-30" [ngClass]="{ 'is-invalid': !title!.valid && title!.touched }">
+                                <label for="first_name" class="mb-2">Title*</label>
+                                <input type="text" formControlName="title"
+                                    [ngClass]="{ 'is-invalid': !title!.valid && title!.touched }" class="form-control"
+                                    required />
+                                <div *ngIf="!title!.valid && title!.touched" class="text-danger">Title is required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="email" class="mb-2">Years of experience (number)*</label>
+                                <input type="number" formControlName="experience"
+                                    [ngClass]="{ 'is-invalid': !experience!.valid && experience!.touched }"
+                                    class="form-control" required />
+                                <div *ngIf="!experience!.valid && experience!.touched" class="text-danger">Experience is
+                                    required.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="mb-2">Salary per month (double)*</label>
+                                <input type="number" formControlName="salary"
+                                    [ngClass]="{ 'is-invalid': !salary!.valid && salary!.touched }" class="form-control"
+                                    required />
+                                <div *ngIf="!salary!.valid && salary!.touched" class="text-danger">Salary is required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="password" class="mb-2">Contract type*</label>
+                                <select formControlName="contractType" class="form-control">
+                                    <option [selected]="true">Select contract type</option>
+                                    <option value="Permanent">Permanent</option>
+                                    <option value="Freelance">Freelance</option>
+                                    <option value="FixedTerm">FixedTerm</option>
+                                    <option value="Internship">Internship</option>
+
+                                </select>
+                                <div *ngIf="!contractType!.valid && contractType!.touched" class="text-danger">Contract
+                                    type is required.</div>
+                            </div>
+                            
+                           
+                            <div  class="col-md-6">
+                                <app-select-company [companyId]="companyId"></app-select-company>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="password" class="mb-2">Job type*</label>
+                                <select formControlName="jobType" class="form-control">
+                                    <option [selected]="true">Select job type</option>
+                                    <option value="FULL_TIME">Full time</option>
+                                    <option value="PART_TIME">Part time</option>
+                                </select>
+                                <div *ngIf="!jobType!.valid && jobType!.touched" class="text-danger">Job type is
+                                    required.</div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="password" class="mb-2">Level of education*</label>
+                                <select formControlName="levelOfEducation" class="form-control">
+                                    <option [selected]="true">Select Level of education</option>
+                                    <option value="Secondary_Education"> Secondary Education</option>
+                                    <option value="Specialisation">Specialisation</option>
+                                    <option value="Bachelor">Bachelor</option>
+                                    <option value="Master">Master</option>
+                                    <option value="Doctorate">Doctorate</option>
+                                </select>
+                                <div *ngIf="!levelOfEducation!.valid && levelOfEducation!.touched" class="text-danger">
+                                    Level of education is required.</div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <label for="last_name" class="mb-2">Description*</label>
+                            <textarea type="text" formControlName="description"
+                                [ngClass]="{ 'is-invalid': !description!.valid && description!.touched }"
+                                class="form-control description-textarea" required ></textarea>
+                            <div *ngIf="!description!.valid && description!.touched" class="text-danger">Description
+                                is required.</div>
+                        </div>
+                        <app-address [addressFormGroup]="address"></app-address>
+
+                        <div class="border-top mt-4 pt-4">
+                            <h3>Skills</h3>
+                            <div id="skills-container">
+                                <div class="row mb-3" formArrayName="skills"
+                                    *ngFor="let skill of skills.controls; let i = index">
+                                    <div class="col-md-10">
+                                        <input type="text" [formControlName]="i" class="form-control"
+                                            placeholder="Enter Skill" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-danger"
+                                            (click)="removeSkill(i)">Remove</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary" (click)="addSkill()">Add Skill</button>
+                            </div>
+                        </div>
+
+                        <div class="border-top mt-4 pt-4">
+                            <h3>Responsibilities</h3>
+                            <div id="skills-container">
+                                <div class="row mb-3" formArrayName="responsibilities"
+                                    *ngFor="let responsibility of responsibilities.controls; let i = index">
+                                    <div class="col-md-10">
+                                        <input type="text" [formControlName]="i" class="form-control"
+                                            placeholder="Enter Skill" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-danger"
+                                            (click)="removeResponsibility(i)">Remove</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary" (click)="addResponsibility()">Add
+                                    Skill</button>
+                            </div>
+                        </div>
+
+                        <div class="border-top mt-4 pt-4">
+                            <h3>Benefits</h3>
+                            <div id="skills-container">
+                                <div class="row mb-3" formArrayName="benefits"
+                                    *ngFor="let benefit of benefits.controls; let i = index">
+                                    <div class="col-md-10">
+                                        <input type="text" [formControlName]="i" class="form-control"
+                                            placeholder="Enter Skill" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-danger"
+                                            (click)="removeBenefit(i)">Remove</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary" (click)="addBenefit()">Add Skill</button>
+                            </div>
+                        </div>
+
+                        <div class="border-top mt-4 pt-4">
+                            <h3>Languages</h3>
+                            <div id="languages-container">
+                                <div class="row mb-3" formArrayName="languages"
+                                    *ngFor="let language of languages.controls; let i = index">
+                                    <div class="col-md-10">
+                                        <input type="text" [formControlName]="i" class="form-control"
+                                            placeholder="Enter Language" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-danger"
+                                            (click)="removeLanguage(i)">Remove</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary" (click)="addLanguage()">Add
+                                    Language</button>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary mt-2" [disabled]="!createJobForm.valid"
+                            (click)="onSubmit()">Register</button>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,64 @@
+<div class="contact-container">
+  <div class="contact-content">
+    <div class="contact-info">
+      <h2>Let's get in touch</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe dolorum adipisci recusandae praesentium dicta!</p>
+      <ul>
+        <li>
+          <i class="fa fa-map-marker"></i>
+          <span>92 Cherry Drive Uniondale, NY 11553</span>
+        </li>
+        <li>
+          <i class="fa fa-envelope"></i>
+          <span>loremipsum.com</span>
+        </li>
+        <li>
+          <i class="fa fa-phone"></i>
+          <span>123-456-789</span>
+        </li>
+      </ul>
+      <div class="social-media">
+        <p>Connect with us:</p>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+    <div class="contact-form">
+      <h2>Contact us</h2>
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <input type="text" id="name" formControlName="name" required placeholder="Username">
+          <div *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched">
+            <small *ngIf="contactForm.get('name')?.errors?.['required']">Name is required.</small>
+            <small *ngIf="contactForm.get('name')?.errors?.['minlength']">Name must be at least 2 characters long.</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" formControlName="email" required placeholder="Email">
+          <div *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
+            <small *ngIf="contactForm.get('email')?.errors?.['required']">Email is required.</small>
+            <small *ngIf="contactForm.get('email')?.errors?.['email']">Invalid email address.</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" id="phone" formControlName="phone" required placeholder="Phone">
+          <div *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched">
+            <small *ngIf="contactForm.get('phone')?.errors?.['required']">Phone number is required.</small>
+            <small *ngIf="contactForm.get('phone')?.errors?.['pattern']">Invalid phone number.</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea id="message" formControlName="message" required placeholder="Message"></textarea>
+          <div *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.touched">
+            <small *ngIf="contactForm.get('message')?.errors?.['required']">Message is required.</small>
+            <small *ngIf="contactForm.get('message')?.errors?.['minlength']">Message must be at least 10 characters long.</small>
+          </div>
+        </div>
+        <button type="submit" class="btn">Send</button>
+      </form>
+      <p>{{ message }}</p>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,116 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the theme object.
+$job-portal-frontend-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+:root {
+  @include mat.all-component-themes($job-portal-frontend-theme);
+}
+
+// Comment out the line below if you want to use the pre-defined typography utility classes.
+// For more information: https://material.angular.io/guide/typography#using-typography-styles-in-your-application.
+// @include mat.typography-hierarchy($job-portal-frontend-theme);
+
+// Comment out the line below if you want to use the deprecated `color` inputs.
+// @include mat.color-variants-backwards-compatibility($job-portal-frontend-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  background-color: #eefffa ;
+}
+.btn-primary {
+  background-color: #00806F !important;
+  border: #00806F !important;
+}
+
+.view-mode {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background-color: transparent;
+  pointer-events: none; // Make input fields uneditable in view mode
+}
+
+.bg-primary {
+  background-color: #00806F !important;
+  color: #fff;
+}
+.link-primary:hover {
+  cursor: pointer;
+}
+
+.description-textarea{
+  height: 200px;
+}
+
+.button-actions button {
+  margin: 4px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+
+.auth-container {
+  background-color: #f8f9fa; 
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+  background-color: #eefffa;
+}
+
+
+.auth-form {
+  max-width: 400px;
+  width: 100%;
+}
+
+
+.auth-form h2 {
+  font-weight: 700;
+  color: #00806F; 
+}
+
+
+.auth-form a {
+  color: #00806F;
+}
+
+.auth-form a:hover {
+  color: #006a58;
+  text-decoration: none;
+}
+
+
+.btn-primary {
+  background-color: #00806F;
+  border-color: #00806F;
+}
+
+.btn-primary:hover {
+  background-color: #006a58;
+  border-color: #006a58;
+}

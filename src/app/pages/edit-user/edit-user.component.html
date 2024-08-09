@@ -1,0 +1,247 @@
+<section class="section-5">
+  <div class="container my-5">
+    <div class="py-lg-2">&nbsp;</div>
+
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-30">
+        <div class="button-actions">
+          <button type="button" *ngIf="mayEdit()" class="btn btn-primary" (click)="enableForm()">Edit</button>
+          <button type="button" *ngIf="mayEdit()" class="btn btn-danger" (click)="deleteUser()">Delete</button>
+        </div>
+        <div class="card shadow border-0 p-5">
+          <h1 class="h3">{{ firstName.value}} {{ lastName.value }}</h1>
+
+          <form [formGroup]="editUserForm">
+            <div class="row mb-3">
+              <div class="col-md-6" [ngClass]="{ 'is-invalid': !firstName!.valid && firstName!.touched }">
+                <label for="first_name" class="mb-2">First Name*</label>
+                <input
+                  type="text"
+                  formControlName="firstName"
+                  [ngClass]="{ 'is-invalid': !firstName!.valid && firstName!.touched }"
+                  class="form-control"
+                  required
+                />
+                <div *ngIf="!firstName!.valid && firstName!.touched" class="text-danger">First Name is required.</div>
+              </div>
+              <div class="col-md-6">
+                <label for="last_name" class="mb-2">Last Name*</label>
+                <input
+                  type="text"
+                  formControlName="lastName"
+                  [ngClass]="{ 'is-invalid': !lastName!.valid && lastName!.touched }"
+                  class="form-control"
+                  required
+                />
+                <div *ngIf="!lastName!.valid && lastName!.touched" class="text-danger">Last Name is required.</div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="email" class="mb-2">Email*</label>
+                <input
+                  type="email"
+                  formControlName="email"
+                  [ngClass]="{ 'is-invalid': !email!.valid && email!.touched }"
+                  class="form-control"
+                  required
+                />
+                <div *ngIf="!email!.valid && email!.touched" class="text-danger">Email is required.</div>
+              </div>
+              <div class="col-md-6">
+                <label for="phone" class="mb-2">Phone*</label>
+                <input
+                  type="text"
+                  formControlName="phone"
+                  [ngClass]="{ 'is-invalid': !phone!.valid && phone!.touched }"
+                  class="form-control"
+                  required
+                />
+                <div *ngIf="!phone!.valid && phone!.touched" class="text-danger">Phone is required.</div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="birth_date" class="mb-2">Birth Date*</label>
+                <input
+                  type="date"
+                  formControlName="birthDate"
+                  [ngClass]="{ 'is-invalid': !birthDate!.valid && birthDate!.touched }"
+                  class="form-control"
+                  required
+                />
+                <div *ngIf="!birthDate!.valid && birthDate!.touched && !birthDate.errors?.['tooYoung']" class="text-danger">
+                  Birth Date is required.
+                </div>
+                <div class="text-danger" *ngIf="birthDate.errors?.['tooYoung']">
+                  You must be 18 or older.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="nationality" class="mb-2">Nationality*</label>
+                <input
+                  type="text"
+                  formControlName="nationality"
+                  [ngClass]="{ 'is-invalid': !nationality!.valid && nationality!.touched }"
+                  class="form-control"
+                  required
+                />
+                <div *ngIf="!nationality!.valid && nationality!.touched" class="text-danger">Nationality is required.</div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="profileTitle" class="mb-2">Profile Title*</label>
+                <input
+                  type="text"
+                  formControlName="profileTitle"
+                  [ngClass]="{ 'is-invalid': !profileTitle!.valid && profileTitle!.touched }"
+                  class="form-control"
+                  required
+                />
+                <div *ngIf="!profileTitle!.valid && profileTitle!.touched" class="text-danger">Profile Title is required.</div>
+              </div>
+            </div>
+            <app-address [addressFormGroup]="address"></app-address>
+            <div class="border-top mt-4 pt-4">
+              <h3>CV</h3>
+              <div class="mb-3">
+                <div class="input-group mb-3">
+                  <input type="file" accept=".pdf,.doc,.docx" [hidden]="editUserForm.disabled" class="form-control" (change)="onFileChange($event, 'cv')" />
+                </div>
+                <div *ngIf="cvPreviewUrl" class="mt-2">
+                  <pdf-viewer
+                    [src]="cvPreviewUrl"
+                    [render-text]="true"
+                    [original-size]="true"
+                    style="width: 100%; height: 500px"
+                  ></pdf-viewer>
+                  <div class="col-md-2">
+                    <button type="button" class="btn btn-danger" [hidden]="editUserForm.disabled" (click)="removeCv()">Remove</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="border-top mt-4 pt-4">
+              <h3>Profile Picture</h3>
+              <div class="mb-3">
+                <div class="input-group mb-3">
+                  <input type="file" accept="image/*" [hidden]="editUserForm.disabled" class="form-control" (change)="onFileChange($event, 'profilePicture')" />
+                </div>
+                <div *ngIf="profilePicturePreviewUrl" class="mt-3">
+                  <img
+                    alt="Profile Picture"
+                    width="200"
+                    height="200"
+                    [src]="profilePicturePreviewUrl"
+                    class="img-thumbnail mt-2"
+                  />
+                  <div class="col-md-2">
+                    <button type="button" class="btn btn-danger" [hidden]="editUserForm.disabled" (click)="removeProfilePicture()">Remove</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="border-top mt-4 pt-4">
+              <h3>Skills</h3>
+              <div id="skills-container">
+                <div class="row mb-3" formArrayName="skills" *ngFor="let skill of skills.controls; let i = index">
+                  <div class="col-md-10">
+                    <input
+                      type="text"
+                      [formControlName]="i"
+                      class="form-control"
+                      placeholder="Enter Skill"
+                      (input)="removeDuplicatesAfterDelay(skills)"
+                    />
+                  </div>
+                  <div class="col-md-2">
+                    <button type="button" class="btn btn-danger" [hidden]="editUserForm.disabled" (click)="removeSkill(i)">Remove</button>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-primary" [hidden]="editUserForm.disabled" (click)="addSkill()">Add Skill</button>
+              </div>
+            </div>
+            <app-experience-entry [experiences]="experiences" [formDisabled]="editUserForm.disabled"></app-experience-entry>
+            <app-qualification-entry [qualifications]="qualifications" [formDisabled]="editUserForm.disabled"></app-qualification-entry>
+            <div class="border-top mt-4 pt-4">
+              <h3>Languages</h3>
+              <div id="languages-container">
+                <div class="row mb-3" formArrayName="languages" *ngFor="let language of languages.controls; let i = index">
+                  <div class="col-md-10">
+                    <input
+                      type="text"
+                      [formControlName]="i"
+                      (input)="removeDuplicatesAfterDelay(languages)"
+                      class="form-control"
+                      placeholder="Enter Language"
+                    />
+                  </div>
+                  <div class="col-md-2">
+                    <button type="button" class="btn btn-danger" [hidden]="editUserForm.disabled" (click)="removeLanguage(i)">Remove</button>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-primary" [hidden]="editUserForm.disabled" (click)="addLanguage()">Add Language</button>
+              </div>
+            </div>
+            <div class="border-top mt-4 pt-4">
+              <div class="mb-3">
+                <label for="bio" class="mb-2">Bio</label>
+                <textarea id="bio" formControlName="bio" name="bio" class="form-control description-textarea"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="githubUrl" class="mb-2">GitHub URL</label>
+                <input
+                  type="text"
+                  formControlName="githubUrl"
+                  class="form-control"
+                  placeholder="Enter GitHub URL"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="linkedinUrl" class="mb-2">LinkedIn URL</label>
+                <input
+                  type="text"
+                  formControlName="linkedinUrl"
+                  class="form-control"
+                  placeholder="Enter LinkedIn URL"
+                />
+              </div>
+            </div>
+            <div class="button-actions">
+              <button class="btn btn-primary mt-2" *ngIf="mayEdit()" [disabled]="!editUserForm.valid || editUserForm.disabled" (click)="onSubmit()">Update</button>
+              <button type="button" *ngIf="mayEdit()" class="btn btn-secondary mt-2" (click)="viewForm()">Cancel</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Latest Job Listings Section -->
+        <div class="card shadow border-0 p-5 mt-5" *ngIf="mayEdit()">
+          <h2 class="text-2xl font-bold mb-4">Your applied Job </h2>
+          <div class="row">
+            <div class="col-12 col-md-6 col-lg-4 mb-4" *ngFor="let job of jobs">
+              <div class="card shadow-sm border-0 h-100" [routerLink]="['/jobs', job.id]">
+                <img [src]="job.companyLogo || 'https://placehold.co/300x200'" alt="job-poster" class="w-100 h-40 object-cover rounded-top" />
+                <div class="card-body">
+                  <h3 class="text-lg font-bold mb-2">{{ job.title }}</h3>
+                  <p class="link-primary" [routerLink]="['/companies', job.companyId]">{{ job.companyName }}</p>
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-geo-alt me-2"></i>
+                    <p class="text-sm text-muted mb-0">{{ job.address?.city }} {{ job.address?.country }}</p>
+                  </div>
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-calendar me-2"></i>
+                    <p class="text-sm text-muted mb-0">Posted on: {{ job.createdDate }}</p>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End of Latest Job Listings Section -->
+
+      </div>
+    </div>
+  </div>
+</section>

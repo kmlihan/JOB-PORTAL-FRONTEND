@@ -1,0 +1,113 @@
+<div class="container mt-4">
+  <h2>User List</h2>
+  <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" formControlName="firstName" class="form-control">
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" formControlName="lastName" class="form-control">
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" class="form-control">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" formControlName="phone" class="form-control">
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="birthDate">Birth Date</label>
+        <input type="date" id="birthDate" formControlName="birthDate" class="form-control">
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="nationality">Nationality</label>
+        <input type="text" id="nationality" formControlName="nationality" class="form-control">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="profileTitle">Profile Title</label>
+        <input type="text" id="profileTitle" formControlName="profileTitle" class="form-control">
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="skills">Skills</label>
+        <input type="text" id="skills" formControlName="skills" class="form-control">
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="languages">Languages</label>
+        <input type="text" id="languages" formControlName="languages" class="form-control">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="archived">Archived</label>
+        <select id="archived" formControlName="archived" class="form-control">
+          <option [ngValue]="null">Select</option>
+          <option [ngValue]="true">Yes</option>
+          <option [ngValue]="false">No</option>
+        </select>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="city">City</label>
+        <input type="text" id="city" formControlName="city" class="form-control">
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="country">Country</label>
+        <input type="text" id="country" formControlName="country" class="form-control">
+      </div>
+    </div>
+    <div class="filters">
+      <button type="submit" class="btn btn-primary">Search</button>
+      <button type="submit" class="btn btn-primary" (click)="resetFilter()">Reset</button>
+    </div>
+
+  </form>
+
+  <div *ngIf="users.length > 0">
+    <h3 class="mt-4">Results</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Full Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Address</th>
+          <th scope="col">Profile Title</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td data-label="Full Name">{{ user.firstName || '' }} {{ user.lastName || '' }}</td>
+          <td data-label="Email">{{ user.email || '' }}</td>
+          <td data-label="Phone">{{ user.phone || '' }}</td>
+          <td data-label="Address">{{ user.address?.street || '' }} {{ user.address?.postalCode || '' }} {{ user.address?.city || '' }}, {{ user.address?.country || '' }}</td>
+          <td data-label="Profile Title">{{ user.profileTitle || '' }}</td>
+          <td data-label="Actions">
+            <button class="btn btn-sm btn-primary" [routerLink]="['/users', user.id]">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteUser(user.id!)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination-wrapper">
+      <app-paginator
+        [totalPages]="getTotalPages()"
+        [currentPage]="page + 1"
+        (pageChange)="onPageChange($event)"
+      ></app-paginator>
+      <div class="page-size-container">
+        <label for="pageSize">Page Size:</label>
+        <select id="pageSize" [(ngModel)]="size" (change)="setPageSize($event)">
+          <option *ngFor="let pageSize of pageSizes" [value]="pageSize">{{ pageSize }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
